@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .title {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <h1 id="titletext" class="">Hello, World!</h1>
+  <div id="greeting"> i am Wasitpol</div> -->
+  <!-- <button onclick="changeColor()">This will Change Color</button> -->
+  <!-- <button id="changebtn">This will Change Color</button>  -->
+  <!-- <button onclick="hideElement()" id="Hidebtn">Hide Element</button> -->
+
+  <input type="text" name="" id="todo" placeholder="please input"></input>
+  <button onclick="addElementonInput()"> Add Element</button><br>
+  <button onclick="removeElement()">Remove Element</button>
+  <div id="results"></div>
+
+  <!-- ทุกๆ  Element  สามารถมี Event อะไรบางอย่างได้  -->
+
+  <!-- 
+  1.เราสามารถสร้าง element ใหม่ได้แล้ว
+  2เราจะเพิีมข้อความงไปใน element ใหม่ที่สร้าง
+  3.เราสามารถเรียก element ที่อยากจะเพิ่มข้อมูลได้แล้ว
+  4.เพิ่มข้อมูลใหม่ลงใน element ปลายทาง
+  -->
+
+  <script>
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(response => response.json())
+      // .then(json => console.log(json))
+      // .then((json) => {
+      //   let result = document.getElementById("results");
+      //   json.forEach((element) => {
+      //     let newElement = document.createElement("p");
+      //     newElement.innerHTML = element.title;
+      //     result.appendChild(newElement);
+      //   });
+      .then((json) => {
+        let result = document.getElementById("results");
+        for (let i = 0; i < json.length(); i++) {
+          let newElement = document.createElement("p");
+          newElement.innerHTML = json[i].title;
+          result.appendChild(newElement);
+        };
+      });
+
+    function addElement() {
+      let newElement = document.createElement("p")
+      newElement.innerHTML = "Hello world"
+      let result = document.getElementById("results")
+      result.appendChild(newElement)
+    }
+
+    function removeElement() {
+      let result = document.getElementById("results")
+      if (result.lastElementChild) {
+        result.removeChild(result.lastElementChild)
+      }
+    }
+
+    function addElementonInput() {
+      let input = document.getElementById("todo").value;
+      let newElement = document.createElement("p");
+      newElement.innerHTML = input
+      let result = document.getElementById("results")
+      result.appendChild(newElement);
+      document.getElementById("todo").value = "";
+    }
+
+  </script>
+
+
+</body>
+
+</html>
